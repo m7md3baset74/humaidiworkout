@@ -1,15 +1,33 @@
 "use client";
+
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
-const images = Array.from({ length: 9 }, (_, i) => `/images/client${i + 1}.jpeg`);
+const images: string[] = Array.from(
+  { length: 9 },
+  (_, i) => `/images/client${i + 1}.jpeg`
+);
 
 export default function ClientReviewsSection() {
-  const [index, setIndex] = useState(0);
-  const sliderRef = useRef(null);
-  const touchStartX = useRef(null);
+  const [index, setIndex] = useState<number>(0);
+  const [isDesktop, setIsDesktop] = useState<boolean>(false);
+
+  const sliderRef = useRef<HTMLDivElement | null>(null);
+  const touchStartX = useRef<number | null>(null);
 
   const visibleDesktop = 4;
+
+  /* ============== CHECK SCREEN SIZE (SSR SAFE) ============== */
+  useEffect(() => {
+    const checkScreen = () => {
+      setIsDesktop(window.innerWidth >= 768);
+    };
+
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
 
   /* ============== AUTOPLAY ============== */
   useEffect(() => {
@@ -21,21 +39,30 @@ export default function ClientReviewsSection() {
   }, []);
 
   /* ============== SWIPE (MOBILE) ============== */
-  const onTouchStart = (e) => {
+  const onTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     touchStartX.current = e.touches[0].clientX;
   };
 
-  const onTouchEnd = (e) => {
+  const onTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (touchStartX.current === null) return;
+
     const diff = touchStartX.current - e.changedTouches[0].clientX;
-    if (diff > 50) setIndex((i) => (i + 1) % images.length);
-    if (diff < -50)
+
+    if (diff > 50) {
+      setIndex((i) => (i + 1) % images.length);
+    }
+
+    if (diff < -50) {
       setIndex((i) => (i === 0 ? images.length - 1 : i - 1));
+    }
+
+    touchStartX.current = null;
   };
 
   return (
-    <section id="" className="py-20 overflow-hidden">
-        
-        <div className="text-center max-w-xl mx-auto mb-14">
+    <section className="py-20 overflow-hidden">
+      {/* Title */}
+      <div className="text-center max-w-xl mx-auto mb-14">
         <h3 className="text-3xl md:text-4xl font-extrabold">
           Client <span className="text-green-300">Reviews</span>
         </h3>
@@ -44,6 +71,7 @@ export default function ClientReviewsSection() {
         </p>
       </div>
 
+      {/* Slider */}
       <div
         className="relative md:px-2"
         ref={sliderRef}
@@ -54,7 +82,7 @@ export default function ClientReviewsSection() {
           className="flex transition-transform duration-700 ease-in-out"
           style={{
             transform: `translateX(-${
-              (index * 100) / (window.innerWidth >= 768 ? visibleDesktop : 1)
+              (index * 100) / (isDesktop ? visibleDesktop : 1)
             }%)`,
           }}
         >
