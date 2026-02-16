@@ -13,9 +13,10 @@ const IMAGES: string[] = Array.from(
 const AUTOPLAY_DELAY = 2500;
 const AUTOPLAY_RESUME_DELAY = 5000;
 const VISIBLE_DESKTOP = 4;
+const SWIPE_THRESHOLD = 40;
 
 /* ================= COMPONENT ================= */
-export default function ClientReviewsSection() {
+export default function ClientReviewsSection(){
   /* -------- STATE -------- */
   const [isDesktop, setIsDesktop] = useState(false);
   const [enableTransition, setEnableTransition] = useState(true);
@@ -24,9 +25,12 @@ export default function ClientReviewsSection() {
   /* -------- REFS -------- */
   const autoplayRef = useRef<NodeJS.Timeout | null>(null);
   const resumeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const touchStartX = useRef<number | null>(null);
 
-  /* -------- CLONED IMAGES (INFINITE LOOP) -------- */
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
+  const isSwiping = useRef(false);
+
+  /* -------- CLONED IMAGES -------- */
   const images = [
     ...IMAGES.slice(-VISIBLE_DESKTOP),
     ...IMAGES,
@@ -110,21 +114,33 @@ export default function ClientReviewsSection() {
     resumeAutoplayLater();
   };
 
-  /* -------- SWIPE (MOBILE) -------- */
+  /* -------- TOUCH (FIXED) -------- */
   const onTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-    stopAutoplay();
     touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    isSwiping.current = false;
+  };
+
+  const onTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    const deltaX = Math.abs(e.touches[0].clientX - touchStartX.current);
+    const deltaY = Math.abs(e.touches[0].clientY - touchStartY.current);
+
+    if (deltaX > SWIPE_THRESHOLD && deltaX > deltaY) {
+      if (!isSwiping.current) {
+        isSwiping.current = true;
+        stopAutoplay();
+      }
+    }
   };
 
   const onTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (touchStartX.current === null) return;
+    if (!isSwiping.current) return;
 
     const diff = touchStartX.current - e.changedTouches[0].clientX;
 
-    if (diff > 50) next();
-    if (diff < -50) prev();
+    if (diff > SWIPE_THRESHOLD) next();
+    if (diff < -SWIPE_THRESHOLD) prev();
 
-    touchStartX.current = null;
     resumeAutoplayLater();
   };
 
@@ -143,9 +159,11 @@ export default function ClientReviewsSection() {
 
       {/* Slider */}
       <div
-        className="relative md:px-2"
+        className="relative md:px-3"
         onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
+        style={{ touchAction: "pan-y" }}
       >
         <div
           className={`flex ${
@@ -160,23 +178,15 @@ export default function ClientReviewsSection() {
           }}
         >
           {images.map((src, i) => (
-            <div
-              key={i}
-              className="min-w-full md:min-w-[25%] px-3"
-            >
+            <div key={i} className="min-w-full md:min-w-[25%] px-3">
               <div className="relative aspect-square rounded-2xl overflow-hidden">
-                <Image
-                  src={src}
-                  alt="Client review"
-                  fill
-                  className="object-center"
-                />
+                <Image src={src} alt="Client review" fill />
               </div>
             </div>
           ))}
         </div>
 
-        {/* Arrows (Desktop Only) */}
+        {/* Arrows */}
         <div className="hidden md:flex justify-center gap-6 mt-8">
           <button
             onClick={prev}
@@ -184,7 +194,6 @@ export default function ClientReviewsSection() {
           >
             <FaChevronLeft />
           </button>
-
           <button
             onClick={next}
             className="h-10 w-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-green-300 hover:text-black transition"
