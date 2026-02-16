@@ -2,44 +2,117 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-const images: string[] = Array.from(
+/* ================= DATA ================= */
+const IMAGES: string[] = Array.from(
   { length: 9 },
   (_, i) => `/images/client${i + 1}.jpeg`
 );
 
-export default function ClientReviewsSection() {
-  const [index, setIndex] = useState<number>(0);
-  const [isDesktop, setIsDesktop] = useState<boolean>(false);
+const AUTOPLAY_DELAY = 2500;
+const AUTOPLAY_RESUME_DELAY = 5000;
+const VISIBLE_DESKTOP = 4;
 
-  const sliderRef = useRef<HTMLDivElement | null>(null);
+/* ================= COMPONENT ================= */
+export default function ClientReviewsSection() {
+  /* -------- STATE -------- */
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [enableTransition, setEnableTransition] = useState(true);
+  const [index, setIndex] = useState(VISIBLE_DESKTOP);
+
+  /* -------- REFS -------- */
+  const autoplayRef = useRef<NodeJS.Timeout | null>(null);
+  const resumeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const touchStartX = useRef<number | null>(null);
 
-  const visibleDesktop = 4;
+  /* -------- CLONED IMAGES (INFINITE LOOP) -------- */
+  const images = [
+    ...IMAGES.slice(-VISIBLE_DESKTOP),
+    ...IMAGES,
+    ...IMAGES.slice(0, VISIBLE_DESKTOP),
+  ];
 
-  /* ============== CHECK SCREEN SIZE (SSR SAFE) ============== */
+  /* -------- SCREEN SIZE -------- */
   useEffect(() => {
-    const checkScreen = () => {
-      setIsDesktop(window.innerWidth >= 768);
-    };
-
+    const checkScreen = () => setIsDesktop(window.innerWidth >= 768);
     checkScreen();
     window.addEventListener("resize", checkScreen);
-
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
 
-  /* ============== AUTOPLAY ============== */
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % images.length);
-    }, 2500);
+  /* -------- AUTOPLAY -------- */
+  const startAutoplay = () => {
+    stopAutoplay();
+    autoplayRef.current = setInterval(() => {
+      setIndex((prev) => prev + 1);
+    }, AUTOPLAY_DELAY);
+  };
 
-    return () => clearInterval(interval);
+  const stopAutoplay = () => {
+    if (autoplayRef.current) {
+      clearInterval(autoplayRef.current);
+      autoplayRef.current = null;
+    }
+  };
+
+  const resumeAutoplayLater = () => {
+    if (resumeTimeoutRef.current) {
+      clearTimeout(resumeTimeoutRef.current);
+    }
+    resumeTimeoutRef.current = setTimeout(
+      startAutoplay,
+      AUTOPLAY_RESUME_DELAY
+    );
+  };
+
+  useEffect(() => {
+    startAutoplay();
+    return () => {
+      stopAutoplay();
+      if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+    };
   }, []);
 
-  /* ============== SWIPE (MOBILE) ============== */
+  /* -------- LOOP FIX -------- */
+  useEffect(() => {
+    if (index >= IMAGES.length + VISIBLE_DESKTOP) {
+      setTimeout(() => {
+        setEnableTransition(false);
+        setIndex(VISIBLE_DESKTOP);
+      }, 700);
+    }
+
+    if (index < VISIBLE_DESKTOP) {
+      setTimeout(() => {
+        setEnableTransition(false);
+        setIndex(IMAGES.length + VISIBLE_DESKTOP - 1);
+      }, 700);
+    }
+  }, [index]);
+
+  useEffect(() => {
+    if (!enableTransition) {
+      requestAnimationFrame(() => setEnableTransition(true));
+    }
+  }, [enableTransition]);
+
+  /* -------- CONTROLS -------- */
+  const next = () => {
+    stopAutoplay();
+    setIndex((i) => i + 1);
+    resumeAutoplayLater();
+  };
+
+  const prev = () => {
+    stopAutoplay();
+    setIndex((i) => i - 1);
+    resumeAutoplayLater();
+  };
+
+  /* -------- SWIPE (MOBILE) -------- */
   const onTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    stopAutoplay();
     touchStartX.current = e.touches[0].clientX;
   };
 
@@ -48,17 +121,14 @@ export default function ClientReviewsSection() {
 
     const diff = touchStartX.current - e.changedTouches[0].clientX;
 
-    if (diff > 50) {
-      setIndex((i) => (i + 1) % images.length);
-    }
-
-    if (diff < -50) {
-      setIndex((i) => (i === 0 ? images.length - 1 : i - 1));
-    }
+    if (diff > 50) next();
+    if (diff < -50) prev();
 
     touchStartX.current = null;
+    resumeAutoplayLater();
   };
 
+  /* ================= RENDER ================= */
   return (
     <section className="py-20 overflow-hidden">
       {/* Title */}
@@ -74,19 +144,22 @@ export default function ClientReviewsSection() {
       {/* Slider */}
       <div
         className="relative md:px-2"
-        ref={sliderRef}
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
       >
         <div
-          className="flex transition-transform duration-700 ease-in-out"
+          className={`flex ${
+            enableTransition
+              ? "transition-transform duration-700 ease-in-out"
+              : ""
+          }`}
           style={{
             transform: `translateX(-${
-              (index * 100) / (isDesktop ? visibleDesktop : 1)
+              (index * 100) / (isDesktop ? VISIBLE_DESKTOP : 1)
             }%)`,
           }}
         >
-          {images.concat(images).map((src, i) => (
+          {images.map((src, i) => (
             <div
               key={i}
               className="min-w-full md:min-w-[25%] px-3"
@@ -101,6 +174,23 @@ export default function ClientReviewsSection() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Arrows (Desktop Only) */}
+        <div className="hidden md:flex justify-center gap-6 mt-8">
+          <button
+            onClick={prev}
+            className="h-10 w-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-green-300 hover:text-black transition"
+          >
+            <FaChevronLeft />
+          </button>
+
+          <button
+            onClick={next}
+            className="h-10 w-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-green-300 hover:text-black transition"
+          >
+            <FaChevronRight />
+          </button>
         </div>
       </div>
     </section>
