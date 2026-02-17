@@ -51,7 +51,7 @@ export default function TransformationsSection() {
   };
 
   return (
-    <section id="transfotmations" className="px-4 md:px-12 py-20">
+    <section id="transformations" className="px-4 md:px-12 py-20">
         {/* Title */}
         <div className="text-center max-w-xl mx-auto mb-14">
         <h3 className="text-3xl md:text-4xl font-extrabold">

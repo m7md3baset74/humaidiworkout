@@ -1,9 +1,19 @@
 import { FaFacebookF, FaInstagram, FaWhatsapp, FaTiktok } from "react-icons/fa";
 import Image from "next/image";
 
+const socialLinks = {
+  facebook: "",
+  instagram: "https://www.instagram.com/humaidi_workout?igsh=MTBwaWs5OTJnNDgxdw==",
+  whatsapp: "https://api.whatsapp.com/send/?phone=971527827184&text&type=phone_number&app_absent=0&utm_source=ig",
+  tiktok: "https://www.tiktok.com/@humaidi_workout",
+};
+
 const Hero = () => {
   return (
-    <section id="hero" className="relative w-full min-h-screen overflow-hidden md:flex md:items-center md:justify-between md:px-12 md:pt-15">
+    <section
+      id="hero"
+      className="relative w-full min-h-screen overflow-hidden md:flex md:items-center md:justify-between md:px-12 md:pt-15"
+    >
       {/* ===== MOBILE BACKGROUND IMAGE ===== */}
       <div className="absolute inset-0 md:hidden rounded-2xl p-6">
         <Image
@@ -32,26 +42,54 @@ const Hero = () => {
 
         {/* Social Icons */}
         <div className="flex gap-4 mt-6">
-          {[FaFacebookF, FaInstagram, FaWhatsapp, FaTiktok].map((Icon, i) => (
-            <a
-              key={i}
-              className="mb-4 w-10 h-10 rounded-full bg-white/10 md:bg-[#111827] backdrop-blur flex items-center justify-center hover:bg-green-300 hover:text-black transition"
-            >
-              <Icon />
-            </a>
-          ))}
+          <a
+            href={socialLinks.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mb-4 w-10 h-10 rounded-full bg-white/10 md:bg-[#111827] backdrop-blur flex items-center justify-center hover:bg-green-300 hover:text-black transition"
+          >
+            <FaFacebookF />
+          </a>
+
+          <a
+            href={socialLinks.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mb-4 w-10 h-10 rounded-full bg-white/10 md:bg-[#111827] backdrop-blur flex items-center justify-center hover:bg-green-300 hover:text-black transition"
+          >
+            <FaInstagram />
+          </a>
+
+          <a
+            href={socialLinks.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mb-4 w-10 h-10 rounded-full bg-white/10 md:bg-[#111827] backdrop-blur flex items-center justify-center hover:bg-green-300 hover:text-black transition"
+          >
+            <FaWhatsapp />
+          </a>
+
+          <a
+            href={socialLinks.tiktok}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mb-4 w-10 h-10 rounded-full bg-white/10 md:bg-[#111827] backdrop-blur flex items-center justify-center hover:bg-green-300 hover:text-black transition"
+          >
+            <FaTiktok />
+          </a>
         </div>
         <a
-                    href="#pricing"
-                    className="bg-white/10 md:bg-[#111827] backdrop-blur group relative overflow-hidden rounded-full border-1 border-white/30 px-6 py-2 text-white 
+          href="#pricing"
+          className="bg-white/10 md:bg-[#111827] backdrop-blur group relative overflow-hidden rounded-full border-1 border-white/30 px-6 py-2 text-white 
                                 font-medium text-lg inline-flex items-center justify-center transition-all duration-300 transform 
                                 hover:translate-y-[-2px] hover:shadow-lg hover:border-none md:bg-green-300/70"
-                  >
-                    <span className="relative z-10 "> Start Your Transformation</span>
-                    <div
-                      className="absolute inset-0 bg-gradient-to-r from-green-800 to-green-300 transform scale-x-0 
-                                    group-hover:scale-100 transition-all duration-300 origin-left "></div>
-                  </a>
+        >
+          <span className="relative z-10 "> Start Your Transformation</span>
+          <div
+            className="absolute inset-0 bg-gradient-to-r from-green-800 to-green-300 transform scale-x-0 
+                                    group-hover:scale-100 transition-all duration-300 origin-left "
+          ></div>
+        </a>
       </div>
 
       {/* ===== DESKTOP IMAGE ===== */}

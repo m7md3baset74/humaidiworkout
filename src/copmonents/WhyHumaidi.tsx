@@ -3,7 +3,7 @@ import { FaAppleAlt, FaDumbbell, FaComments } from "react-icons/fa";
 
 const WhyHumaidi = () => {
   return (
-    <section className="px-4 md:px-12 py-20">
+    <section id="whyHumaidi" className="px-4 md:px-12 py-20">
       {/* Title */}
       <div className="text-center max-w-xl mx-auto mb-16">
         <h3 className="text-3xl md:text-4xl font-extrabold">
@@ -46,7 +46,7 @@ const WhyHumaidi = () => {
         <div className="bg-[#111827] rounded-2xl overflow-hidden">
           <div className="relative h-86">
             <Image
-              src="/images/why01.jpg"
+              src="/images/whysec1.png"
               alt="Healthy nutrition"
               fill
               className="object-cover"
@@ -75,7 +75,7 @@ const WhyHumaidi = () => {
         <div className="bg-[#111827] rounded-2xl overflow-hidden">
           <div className="relative h-86">
             <Image
-              src="/images/why3.png"
+              src="/images/whysec3.png"
               alt="Coaching support"
               fill
               className="object-cover"

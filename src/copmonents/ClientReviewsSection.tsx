@@ -146,7 +146,7 @@ export default function ClientReviewsSection(){
 
   /* ================= RENDER ================= */
   return (
-    <section className="py-20 overflow-hidden">
+    <section id="reviews" className="py-20 overflow-hidden">
       {/* Title */}
       <div className="text-center max-w-xl mx-auto mb-14">
         <h3 className="text-3xl md:text-4xl font-extrabold">
