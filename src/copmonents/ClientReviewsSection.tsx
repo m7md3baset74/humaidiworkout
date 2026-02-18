@@ -7,7 +7,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 /* ================= DATA ================= */
 const IMAGES: string[] = Array.from(
   { length: 9 },
-  (_, i) => `/images/client${i + 1}.jpeg`
+  (_, i) => `/images/review${i + 1}.jpeg`
 );
 
 const AUTOPLAY_DELAY = 2500;
@@ -180,7 +180,7 @@ export default function ClientReviewsSection(){
           {images.map((src, i) => (
             <div key={i} className="min-w-full md:min-w-[25%] px-3">
               <div className="relative aspect-square rounded-2xl overflow-hidden">
-                <Image className="object-fill" src={src} alt="Client review" fill />
+                <Image src={src} alt="Client review" fill />
               </div>
             </div>
           ))}
