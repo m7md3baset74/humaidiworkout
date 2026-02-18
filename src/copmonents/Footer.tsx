@@ -103,10 +103,10 @@ export default function Footer() {
         <div className="mt-8 h-px bg-white/10" />
 
         {/* Bottom */}
-        <div className="flex items-center justify-between py-3 text-[11px] text-gray-400">
+        <div className="flex items-center md:justify-between  py-3 text-[11px] text-gray-400">
           <span>
             © 2026 Designed & Developed by{" "}
-            <span className="text-white">3baset_74</span>
+            <span className="text-white mr-6">3baset_74</span>
           </span>
 
           <a
