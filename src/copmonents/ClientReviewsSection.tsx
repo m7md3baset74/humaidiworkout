@@ -180,7 +180,7 @@ export default function ClientReviewsSection(){
           {images.map((src, i) => (
             <div key={i} className="min-w-full md:min-w-[25%] px-3">
               <div className="relative aspect-square rounded-2xl overflow-hidden">
-                <Image src={src} alt="Client review" fill />
+                <Image className="object-fill" src={src} alt="Client review" fill />
               </div>
             </div>
           ))}

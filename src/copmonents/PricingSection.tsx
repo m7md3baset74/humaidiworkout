@@ -15,7 +15,7 @@ const Pricing = () => {
       </div>
 
       {/* Cards */}
-      <div className="grid gap-8 md:grid-cols-3 max-w-6xl mx-auto">
+      <div className="grid gap-8 md:grid-cols-4 max-w-7xl mx-auto">
         {/* 1 Month */}
         <div className="bg-[#111827] p-8 rounded-2xl border border-white/10">
           <h4 className="text-xl font-semibold mb-2">1 Month</h4>
@@ -84,7 +84,35 @@ const Pricing = () => {
           </button>
         </div>
 
-        {/* 1 Year */}
+        {/* 6 Months */}
+        <div className="bg-[#111827] p-8 rounded-2xl border border-white/10">
+          <h4 className="text-xl font-semibold mb-2">6 Months</h4>
+          <p className="text-gray-400 text-sm mb-6">Ultimate Transformation</p>
+
+          <div className="text-4xl font-extrabold mb-6">
+            $222{" "}
+            <span className="text-sm font-normal text-gray-400">/ 6 Months</span>
+          </div>
+
+          <ul className="space-y-3 text-sm text-gray-300 mb-8">
+            <li className="flex items-center gap-2">
+              <FaCheck className="text-green-300" /> Long-term training strategy
+            </li>
+            <li className="flex items-center gap-2">
+              <FaCheck className="text-green-300" /> Advanced nutrition coaching
+            </li>
+            <li className="flex items-center gap-2">
+              <FaCheck className="text-green-300" /> Weekly adjustments
+            </li>
+            <li className="flex items-center gap-2">
+              <FaCheck className="text-green-300" /> Priority support
+            </li>
+          </ul>
+
+          <button className="w-full py-3 rounded-full bg-white/10 hover:bg-green-300 hover:text-black hover:scale-105 transition">
+            Join Now
+          </button>
+        </div>
         <div className="bg-[#111827] p-8 rounded-2xl border border-white/10">
           <h4 className="text-xl font-semibold mb-2">1 Year</h4>
           <p className="text-gray-400 text-sm mb-6">Ultimate Transformation</p>
