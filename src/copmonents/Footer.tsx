@@ -1,9 +1,9 @@
 import {
   FaInstagram,
-  FaFacebookF,
   FaWhatsapp,
   FaArrowUp,
   FaTiktok,
+  FaYoutube,
 } from "react-icons/fa";
 
 export default function Footer() {
@@ -53,10 +53,10 @@ export default function Footer() {
              className="footer-icon hover:text-green-300">
               <FaInstagram />
             </a>
-            <a href=""
+            <a href="https://www.youtube.com/@humaidiomar"
             target="_blank"
             className="footer-icon hover:text-green-300">
-              <FaFacebookF />
+              <FaYoutube />
             </a>
             <a href="https://www.tiktok.com/@humaidi_workout"
             target="_blank"
@@ -106,7 +106,7 @@ export default function Footer() {
         <div className="flex items-center md:justify-between  py-3 text-[11px] text-gray-400">
           <span>
             © 2026 Designed & Developed by{" "}
-            <span className="text-white mr-6">3baset_74</span>
+            <span className="text-white mr-5">3baset_74</span>
           </span>
 
           <a

@@ -1,8 +1,8 @@
-import { FaFacebookF, FaInstagram, FaWhatsapp, FaTiktok } from "react-icons/fa";
+import { FaInstagram, FaWhatsapp, FaTiktok, FaYoutube } from "react-icons/fa";
 import Image from "next/image";
 
 const socialLinks = {
-  facebook: "",
+  youtube: "https://www.youtube.com/@humaidiomar",
   instagram: "https://www.instagram.com/humaidi_workout?igsh=MTBwaWs5OTJnNDgxdw==",
   whatsapp: "https://api.whatsapp.com/send/?phone=971527827184&text&type=phone_number&app_absent=0&utm_source=ig",
   tiktok: "https://www.tiktok.com/@humaidi_workout",
@@ -43,12 +43,12 @@ const Hero = () => {
         {/* Social Icons */}
         <div className="flex gap-4 mt-6">
           <a
-            href={socialLinks.facebook}
+            href={socialLinks.youtube}
             target="_blank"
             rel="noopener noreferrer"
             className="mb-4 w-10 h-10 rounded-full bg-white/10 md:bg-[#111827] backdrop-blur flex items-center justify-center hover:bg-green-300 hover:text-black transition"
           >
-            <FaFacebookF />
+            <FaYoutube />
           </a>
 
           <a
