@@ -31,7 +31,7 @@ export default function IntroSplash() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.1 }}
           transition={{ duration: 0.8 }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black text-white"
+          className="fixed inset-0 z-[9999] flex items-center justify-center text-white"
         >
           <motion.div
             initial={{ y: 40, opacity: 0 }}
@@ -43,7 +43,7 @@ export default function IntroSplash() {
               Welcome
             </h1>
 
-            <p className="mt-6 text-2xl md:text-3xl font-bold text-green-400">
+            <p className="mt-6 text-2xl md:text-3xl font-bold text-green-300">
               Humaidi Omar
             </p>
 
@@ -55,7 +55,7 @@ export default function IntroSplash() {
               initial={{ width: 0 }}
               animate={{ width: 120 }}
               transition={{ delay: 1, duration: 1 }}
-              className="mt-10 h-1 bg-green-400 mx-auto rounded-full"
+              className="mt-10 h-1 bg-green-300 mx-auto rounded-full"
             />
           </motion.div>
         </motion.div>
