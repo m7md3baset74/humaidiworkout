@@ -27,11 +27,11 @@ export default function IntroSplash() {
     <AnimatePresence>
       {visible && (
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.1 }}
           transition={{ duration: 0.8 }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center text-white"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#0b1220] text-white"
         >
           <motion.div
             initial={{ y: 40, opacity: 0 }}
