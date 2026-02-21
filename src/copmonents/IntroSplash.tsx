@@ -21,7 +21,7 @@ export default function IntroSplash({
         setVisible(false);
         setTimeout(() => {
           onFinish();
-        }, 800);
+        }, 500);
       }, 2500);
 
       return () => clearTimeout(timer);
@@ -57,6 +57,12 @@ export default function IntroSplash({
             <p className="mt-2 text-sm md:text-base text-gray-300">
               Transforming Bodies. Building Discipline.
             </p>
+             <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: 120 }}
+              transition={{ delay: 1, duration: 1 }}
+              className="mt-10 h-1 bg-green-400 mx-auto rounded-full"
+            />
           </motion.div>
         </motion.div>
       )}
