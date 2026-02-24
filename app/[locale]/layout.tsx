@@ -28,8 +28,8 @@ export const metadata: Metadata = {
     siteName: "Humaidi Omar",
     images: [
       {
-        url: "/images/og-cover-d.png",
-        width: 1900,
+        url: "/images/og-cover.png",
+        width: 600,
         height: 900,
       },
     ],
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Humaidi Omar | Online Fitness Coach",
     description: "Transforming Bodies. Building Discipline.",
-    images: ["/images/og-cover-d.png"],
+    images: ["/images/og-cover.png"],
   },
 };
 
