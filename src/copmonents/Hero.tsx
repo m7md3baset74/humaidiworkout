@@ -1,14 +1,21 @@
+"use client";
+
 import { FaInstagram, FaWhatsapp, FaTiktok, FaYoutube } from "react-icons/fa";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const socialLinks = {
   youtube: "https://www.youtube.com/@humaidiomar",
-  instagram: "https://www.instagram.com/humaidi_workout?igsh=MTBwaWs5OTJnNDgxdw==",
-  whatsapp: "https://api.whatsapp.com/send/?phone=971527827184&text&type=phone_number&app_absent=0&utm_source=ig",
+  instagram:
+    "https://www.instagram.com/humaidi_workout?igsh=MTBwaWs5OTJnNDgxdw==",
+  whatsapp:
+    "https://api.whatsapp.com/send/?phone=971527827184&text&type=phone_number&app_absent=0&utm_source=ig",
   tiktok: "https://www.tiktok.com/@humaidi_workout",
 };
 
 const Hero = () => {
+  const t = useTranslations("Hero");
+
   return (
     <section
       id="hero"
@@ -23,21 +30,24 @@ const Hero = () => {
           priority
           className="object-cover"
         />
-        {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-black/5 to-black/50" />
       </div>
 
       {/* ===== TEXT CONTENT ===== */}
-      <div className="relative z-10 min-h-screen md:min-h-0 px-4 flex flex-col justify-center items-center text-center md:items-start md:text-left md:w-1/2">
+      <div
+        className="relative z-10 min-h-screen md:min-h-0 px-4 flex flex-col justify-center items-center text-center md:w-1/2
+       md:items-start ltr:md:text-left  rtl:md:text-right">
         <h2 className="text-3xl md:text-5xl font-extrabold leading-tight">
-          Transform Your Body
+          {t("titleLine1")}
           <br />
-          With <span className="text-green-300">Humaidi Omar</span>
+          {t("titleLine2")}
+          <span className="text-green-300">
+            {t("titleLine3", { name: "Humaidi Omar" })}
+          </span>
         </h2>
 
         <p className="mt-4 text-gray-200 md:text-gray-400 text-sm md:text-base leading-relaxed max-w-md">
-          Online fitness coaching to help you build muscle, burn fat, and stay
-          consistent wherever you are.
+          {t("description")}
         </p>
 
         {/* Social Icons */}
@@ -78,23 +88,23 @@ const Hero = () => {
             <FaTiktok />
           </a>
         </div>
+
         <a
           href="#pricing"
-          className="bg-white/10 md:bg-[#111827] backdrop-blur group relative overflow-hidden rounded-full border-1 border-white/30 px-6 py-2 text-white 
-                                font-medium text-lg inline-flex items-center justify-center transition-all duration-300 transform 
-                                hover:translate-y-[-2px] hover:shadow-lg hover:border-none md:bg-green-300/70"
+          className="bg-white/10 md:bg-[#111827] backdrop-blur group relative overflow-hidden rounded-full border border-white/30 px-6 py-2 text-white 
+                     font-medium text-lg inline-flex items-center justify-center transition-all duration-300 transform 
+                     hover:translate-y-[-2px] hover:shadow-lg hover:border-none md:bg-green-300/70"
         >
-          <span className="relative z-10 "> Start Your Transformation</span>
+          <span className="relative z-10">{t("cta")}</span>
           <div
             className="absolute inset-0 bg-gradient-to-r from-green-800 to-green-300 transform scale-x-0 
-                                    group-hover:scale-100 transition-all duration-300 origin-left "
+                       group-hover:scale-100 transition-all duration-300 origin-left"
           ></div>
         </a>
       </div>
 
       {/* ===== DESKTOP IMAGE ===== */}
       <div className="hidden md:flex md:w-1/2 relative justify-center">
-        {/* Gradient Blur Background */}
         <div className="absolute inset-0 bg-gradient-to-tr from-green-400 to-blue-500 blur-3xl opacity-30" />
 
         <div className="relative w-full max-w-md aspect-[3/4] h-140 md:mb-4">
@@ -103,7 +113,7 @@ const Hero = () => {
             alt="Humaidi Workout Coach"
             fill
             priority
-            className="object-cover rounded-2xl "
+            className="object-cover rounded-2xl"
           />
         </div>
       </div>

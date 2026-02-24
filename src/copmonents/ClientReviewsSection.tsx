@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useTranslations, useLocale } from "next-intl";
 
 /* ================= DATA ================= */
 const IMAGES: string[] = Array.from(
@@ -16,7 +17,11 @@ const VISIBLE_DESKTOP = 4;
 const SWIPE_THRESHOLD = 40;
 
 /* ================= COMPONENT ================= */
-export default function ClientReviewsSection(){
+export default function ClientReviewsSection() {
+  const t = useTranslations("Reviews");
+  const locale = useLocale();
+  const isRTL = locale === "ar";
+
   /* -------- STATE -------- */
   const [isDesktop, setIsDesktop] = useState(false);
   const [enableTransition, setEnableTransition] = useState(true);
@@ -114,7 +119,7 @@ export default function ClientReviewsSection(){
     resumeAutoplayLater();
   };
 
-  /* -------- TOUCH (FIXED) -------- */
+  /* -------- TOUCH -------- */
   const onTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
@@ -138,8 +143,8 @@ export default function ClientReviewsSection(){
 
     const diff = touchStartX.current - e.changedTouches[0].clientX;
 
-    if (diff > SWIPE_THRESHOLD) next();
-    if (diff < -SWIPE_THRESHOLD) prev();
+    if (diff > SWIPE_THRESHOLD) (isRTL ? prev() : next());
+    if (diff < -SWIPE_THRESHOLD) (isRTL ? next() : prev());
 
     resumeAutoplayLater();
   };
@@ -147,13 +152,16 @@ export default function ClientReviewsSection(){
   /* ================= RENDER ================= */
   return (
     <section id="reviews" className="py-20 overflow-hidden">
+
       {/* Title */}
       <div className="text-center max-w-xl mx-auto mb-14">
         <h3 className="text-3xl md:text-4xl font-extrabold">
-          Client <span className="text-green-300">Reviews</span>
+          {t("titlePart1")}{" "}
+          <span className="text-green-300">{t("titleHighlight")}</span>
         </h3>
+
         <p className="mt-4 text-gray-400 text-sm md:text-base">
-          Real results from real clients. See how our work makes a difference.
+          {t("description")}
         </p>
       </div>
 
@@ -172,15 +180,21 @@ export default function ClientReviewsSection(){
               : ""
           }`}
           style={{
-            transform: `translateX(-${
-              (index * 100) / (isDesktop ? VISIBLE_DESKTOP : 1)
-            }%)`,
+            transform: `translateX(${
+              isRTL ? "" : "-"
+            }${(index * 100) / (isDesktop ? VISIBLE_DESKTOP : 1)}%)`,
           }}
         >
           {images.map((src, i) => (
             <div key={i} className="min-w-full md:min-w-[25%] px-3">
-              <div className="relative aspect-square rounded-2xl overflow-hidden">
-                <Image src={src} alt="Client review" fill />
+              <div className="relative aspect-square rounded-2xl overflow-hidden group">
+                <Image
+                  src={src}
+                  alt="Client review"
+                  fill
+                  loading={i < 2 ? "eager" : "lazy"}
+                  className="group-hover:scale-105 transition duration-500"
+                />
               </div>
             </div>
           ))}
@@ -189,16 +203,17 @@ export default function ClientReviewsSection(){
         {/* Arrows */}
         <div className="hidden md:flex justify-center gap-6 mt-8">
           <button
-            onClick={prev}
+            onClick={isRTL ? next : prev}
             className="h-10 w-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-green-300 hover:text-black transition"
           >
-            <FaChevronLeft />
+            {isRTL ? <FaChevronRight /> : <FaChevronLeft />}
           </button>
+
           <button
-            onClick={next}
+            onClick={isRTL ? prev : next}
             className="h-10 w-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-green-300 hover:text-black transition"
           >
-            <FaChevronRight />
+            {isRTL ? <FaChevronLeft /> : <FaChevronRight />}
           </button>
         </div>
       </div>

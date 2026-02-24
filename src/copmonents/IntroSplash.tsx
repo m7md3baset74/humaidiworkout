@@ -2,20 +2,20 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import { IoLaptopOutline, IoPhonePortraitOutline } from "react-icons/io5";
 
-export default function IntroSplash({
-  onFinish,
-}: {
-  onFinish: () => void;
-}) {
+export default function IntroSplash({ onFinish }: { onFinish: () => void }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const hasVisited = localStorage.getItem("hasVisited");
+    const lastVisit = localStorage.getItem("lastVisit");
+    const now = Date.now();
 
-    if (!hasVisited) {
+    const ONE_HOUR = 60 * 60 * 1000;
+
+    if (!lastVisit || now - Number(lastVisit) > ONE_HOUR) {
       setVisible(true);
-      localStorage.setItem("hasVisited", "true");
+      localStorage.setItem("lastVisit", now.toString());
 
       const timer = setTimeout(() => {
         setVisible(false);
@@ -48,16 +48,23 @@ export default function IntroSplash({
           >
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-widest">
               Welcome
+              <br />
+              to
             </h1>
 
-            <p className="mt-6 text-2xl md:text-3xl font-bold text-green-300">
+            <p className="flex flex-col mt-6 text-2xl md:text-3xl font-bold text-green-300">
               Humaidi Omar
+              <span className="text-sm font-medium">website</span>
+              <span className="text-4xl font-extralight flex items-center justify-center text-white/40 mt-1">
+                <IoPhonePortraitOutline />
+                <IoLaptopOutline />
+              </span>
             </p>
 
             <p className="mt-2 text-sm md:text-base text-gray-300">
               Transforming Bodies. Building Discipline.
             </p>
-             <motion.div
+            <motion.div
               initial={{ width: 0 }}
               animate={{ width: 120 }}
               transition={{ delay: 1, duration: 1 }}

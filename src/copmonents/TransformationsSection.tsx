@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
+import { useTranslations, useLocale } from "next-intl";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 const transformations = [
   "/images/transFolder/trans1.jpg",
@@ -42,10 +44,15 @@ const transformations = [
 ];
 
 export default function TransformationsSection() {
+  const t = useTranslations("Transformations");
+  const locale = useLocale();
+  const isRTL = locale === "ar";
+
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: "center",
     skipSnaps: false,
+    direction: isRTL ? "rtl" : "ltr",
   });
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -80,9 +87,9 @@ export default function TransformationsSection() {
     >
       {/* Title */}
       <div className="text-center max-w-xl mx-auto mb-14">
-        <h3 className="text-3xl md:text-4xl font-extrabold">Transformations</h3>
+        <h3 className="text-3xl md:text-4xl font-extrabold">{t("title")}</h3>
         <p className="mt-4 text-gray-400 text-sm md:text-base">
-          Real results. Real commitment. Real change.
+          {t("description")}
         </p>
       </div>
 
@@ -105,10 +112,10 @@ export default function TransformationsSection() {
                   >
                     <Image
                       src={img}
-                      alt="Transformation"
+                      alt="Client Transformation"
                       fill
+                      loading={index === 0 ? "eager" : "lazy"}
                       className="object-cover"
-                      priority={index === 0}
                     />
                   </div>
                 </div>
@@ -121,16 +128,16 @@ export default function TransformationsSection() {
         <div className="flex justify-center gap-6 mt-12">
           <button
             onClick={scrollPrev}
-            className="h-11 w-11 rounded-full border border-white/20 bg-white/10 backdrop-blur hover:bg-green-300 hover:text-black transition"
+            className="h-11 w-11 rounded-full border border-white/20 bg-white/10 backdrop-blur hover:bg-green-300 hover:text-black transition flex items-center justify-center"
           >
-            ←
+            {isRTL ? <FiChevronRight /> : <FiChevronLeft />}
           </button>
 
           <button
             onClick={scrollNext}
-            className="h-11 w-11 rounded-full border border-white/20 bg-white/10 backdrop-blur hover:bg-green-300 hover:text-black transition"
+            className="h-11 w-11 rounded-full border border-white/20 bg-white/10 backdrop-blur hover:bg-green-300 hover:text-black transition flex items-center justify-center"
           >
-            →
+            {isRTL ? <FiChevronLeft /> : <FiChevronRight />}
           </button>
         </div>
 

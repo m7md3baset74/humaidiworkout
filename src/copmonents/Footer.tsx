@@ -1,3 +1,5 @@
+"use client";
+
 import {
   FaInstagram,
   FaWhatsapp,
@@ -5,8 +7,13 @@ import {
   FaTiktok,
   FaYoutube,
 } from "react-icons/fa";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function Footer() {
+  const t = useTranslations("Footer");
+  const locale = useLocale();
+  const isRTL = locale === "ar";
+
   const achievements = [
     "🏅 Dubai Pro 6th Place 2025",
     "🏅 Dubai Muscle Show 4th Place 2024",
@@ -34,15 +41,14 @@ export default function Footer() {
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 pt-10">
         {/* Top */}
-        <div className="grid gap-8 md:grid-cols-2 text-center md:text-left">
+        <div className="grid gap-8 md:grid-cols-2 text-center md:text-left rtl:md:text-right">
           {/* About */}
           <div>
             <h4 className="text-lg font-semibold text-white mb-2">
               Coach Humaidi
             </h4>
             <p className="text-gray-400 text-sm leading-relaxed max-w-md">
-              Certified fitness coach focused on sustainable habits through smart
-              training and balanced nutrition.
+              {t("description")}
             </p>
           </div>
 
@@ -50,22 +56,22 @@ export default function Footer() {
           <div className="flex md:justify-end justify-center gap-4 text-2xl">
              <a href="https://www.instagram.com/humaidi_workout?igsh=MTBwaWs5OTJnNDgxdw=="
              target="_blank"
-             className="footer-icon hover:text-green-300">
+             className="footer-icon hover:text-green-300 hover:scale-110 transition">
               <FaInstagram />
             </a>
             <a href="https://www.youtube.com/@humaidiomar"
             target="_blank"
-            className="footer-icon hover:text-green-300">
+            className="footer-icon hover:text-green-300 hover:scale-110 transition">
               <FaYoutube />
             </a>
             <a href="https://www.tiktok.com/@humaidi_workout"
             target="_blank"
-            className="footer-icon hover:text-green-300">
+            className="footer-icon hover:text-green-300 hover:scale-110 transition">
               <FaTiktok />
             </a>
             <a href="https://api.whatsapp.com/send/?phone=971527827184&text&type=phone_number&app_absent=0&utm_source=ig"
             target="_blank"
-            className="footer-icon hover:text-green-300">
+            className="footer-icon hover:text-green-300 hover:scale-110 transition">
               <FaWhatsapp />
             </a>
           </div>
@@ -73,8 +79,8 @@ export default function Footer() {
 
         {/* Achievements */}
         <div className="mt-8">
-          <h5 className="text-sm font-semibold text-white mb-3 text-center md:text-left">
-            Championships & Records
+          <h5 className="text-sm font-semibold text-white mb-3 text-center md:text-left rtl:text-right">
+            {t("achievementsTitle")}
           </h5>
 
           <ul
@@ -105,8 +111,8 @@ export default function Footer() {
         {/* Bottom */}
         <div className="flex items-center md:justify-between  py-3 text-[11px] text-gray-400">
           <span>
-            © 2026 Designed & Developed by{" "}
-            <span className="text-white mr-5">3baset_74</span>
+            © 2026 {t("designedBy")}{" "}
+            <span className="text-white ltr:mr-4 rtl:ml-4">3baset_74</span>
           </span>
 
           <a

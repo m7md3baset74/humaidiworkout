@@ -1,0 +1,155 @@
+{
+  "Navbar": {
+  "transformations": "Transformations",
+  "programs": "Programs",
+  "reviews": "Client Reviews",
+  "pricing": "Pricing",
+  "why": "Why Humaidi",
+  "language": "AR"
+},
+
+
+  "Hero": {
+    "titleLine1": "Transform Your Body",
+    "titleLine2": "With",
+    "titleLine3": " {name}",
+    "description": "Online fitness coaching to help you build muscle, burn fat, and stay consistent wherever you are.",
+    "cta": "Start Your Transformation"
+  },
+
+  "Transformations": {
+  "title": "Transformations",
+  "description": "Real results. Real commitment. Real change."
+},
+
+
+  "Programs": {
+    "titlePart1": "Training",
+    "titleHighlight": "Programs",
+    "description": "Everything you need to reach your fitness goals.",
+    "cards": {
+      "personalTraining": {
+        "title": "Personal Training",
+        "description": "Customized workout plans designed specifically for your body and goals."
+      },
+      "nutrition": {
+        "title": "Nutrition Plan",
+        "description": "Simple and effective nutrition guidance to support your training."
+      },
+      "onlineCoaching": {
+        "title": "Online Coaching",
+        "description": "Continuous follow-up and support to keep you motivated and consistent."
+      },
+      "fatLoss": {
+        "title": "Fat Loss Programs",
+        "description": "Structured programs focused on burning fat while preserving muscle."
+      }
+    }
+  },
+
+  "Reviews": {
+    "titlePart1": "Client",
+    "titleHighlight": "Reviews",
+    "description": "Real results from real clients. See how our work makes a difference."
+  },
+
+  
+  "Pricing": {
+    "titlePart1": "Pricing",
+    "titleHighlight": "Plans",
+    "description": "Choose the plan that fits your goals and commitment.",
+    "mostPopular": "MOST POPULAR",
+    "plans": {
+      "oneMonth": {
+        "title": "1 Month",
+        "subtitle": "Starter Plan",
+        "price": "$49",
+        "period": "/ month",
+        "button": "Get Started",
+        "features": [
+          "Custom workout plan",
+          "Basic nutrition guidance",
+          "Weekly check-ins"
+        ]
+      },
+      "threeMonths": {
+        "title": "3 Months",
+        "subtitle": "Best Results Plan",
+        "price": "$129",
+        "period": "/ total",
+        "button": "Start Now",
+        "features": [
+          "Personalized workout program",
+          "Full nutrition plan",
+          "Weekly progress tracking",
+          "WhatsApp support"
+        ]
+      },
+      "sixMonths": {
+        "title": "6 Months",
+        "subtitle": "Ultimate Transformation",
+        "price": "$222",
+        "period": "/ 6 Months",
+        "button": "Join Now",
+        "features": [
+          "Long-term training strategy",
+          "Advanced nutrition coaching",
+          "Weekly adjustments",
+          "Priority support"
+        ]
+      },
+      "oneYear": {
+        "title": "1 Year",
+        "subtitle": "Ultimate Transformation",
+        "price": "$399",
+        "period": "/ year",
+        "button": "Join Now",
+        "features": [
+          "Long-term training strategy",
+          "Advanced nutrition coaching",
+          "Weekly adjustments",
+          "Priority support"
+        ]
+      }
+    }
+  },
+
+  "WhyHumaidi": {
+    "titlePart1": "Why",
+    "titleHighlight": "Humaidi",
+    "description": "More than training — a complete lifestyle transformation",
+    "mark": "?",
+    "cards": {
+      "training": {
+        "title": "Smart & Personalized Training",
+        "description": "Training programs built around your body type, fitness level, and lifestyle — not generic plans copied for everyone."
+      },
+      "nutrition": {
+        "title": "Healthy Nutrition System",
+        "description": "A balanced nutrition plan designed for better digestion and long-term health, with enjoyable meals you can actually stick to — no extreme diets."
+      },
+      "support": {
+        "title": "Real Support & Follow-Up",
+        "description": "Continuous follow-ups, progress tracking, and direct communication to keep you consistent and motivated throughout your journey."
+      }
+    },
+    "stats": {
+      "clients": {
+        "number": "+200",
+        "label": "Clients Transformed"
+      },
+      "experience": {
+        "number": "+5",
+        "label": "Years Experience"
+      }
+    }
+  },
+
+  "Footer": {
+    "description": "Certified fitness coach focused on sustainable habits through smart training and balanced nutrition.",
+    "achievementsTitle": "Championships & Records",
+    "designedBy": "Designed & Developed by"
+  }
+
+
+}
