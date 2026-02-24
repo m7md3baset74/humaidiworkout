@@ -20,6 +20,29 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Humaidi Omar | Online Fitness Coach",
   description: "Transforming Bodies. Building Discipline.",
+
+  openGraph: {
+    title: "Humaidi Omar | Online Fitness Coach",
+    description: "Transforming Bodies. Building Discipline.",
+    url: "https://humaidiworkout.vercel.app",
+    siteName: "Humaidi Omar",
+    images: [
+      {
+        url: "/images/og-cover-d.png",
+        width: 1900,
+        height: 900,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Humaidi Omar | Online Fitness Coach",
+    description: "Transforming Bodies. Building Discipline.",
+    images: ["/images/og-cover-d.png"],
+  },
 };
 
 export function generateStaticParams() {
