@@ -63,8 +63,8 @@
       "oneMonth": {
         "title": "1 Month",
         "subtitle": "Starter Plan",
-        "price": "$49",
-        "period": "/ month",
+        "price": "800",
+        "currency": "AED / EGP",
         "button": "Get Started",
         "features": [
           "Custom workout plan",
@@ -75,8 +75,8 @@
       "threeMonths": {
         "title": "3 Months",
         "subtitle": "Best Results Plan",
-        "price": "$129",
-        "period": "/ total",
+        "price": "2100",
+        "currency": "AED / EGP",
         "button": "Start Now",
         "features": [
           "Personalized workout program",
@@ -88,8 +88,8 @@
       "sixMonths": {
         "title": "6 Months",
         "subtitle": "Ultimate Transformation",
-        "price": "$222",
-        "period": "/ 6 Months",
+        "price": "3900",
+        "currency": "AED / EGP",
         "button": "Join Now",
         "features": [
           "Long-term training strategy",
@@ -101,8 +101,8 @@
       "oneYear": {
         "title": "1 Year",
         "subtitle": "Ultimate Transformation",
-        "price": "$399",
-        "period": "/ year",
+        "price": "7200",
+        "currency": "AED / EGP",
         "button": "Join Now",
         "features": [
           "Long-term training strategy",

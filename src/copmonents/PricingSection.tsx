@@ -85,8 +85,8 @@ const Pricing = () => {
 
               <div className="text-4xl font-extrabold mb-6">
                 {t(`plans.${plan.key}.price`)}{" "}
-                <span className="text-sm font-normal text-gray-400">
-                  {t(`plans.${plan.key}.period`)}
+                <span className="text-xl font-normal text-gray-400">
+                  {t(`plans.${plan.key}.currency`)}
                 </span>
               </div>
 
