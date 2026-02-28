@@ -7,9 +7,9 @@ import { useTranslations } from "next-intl";
 const socialLinks = {
   youtube: "https://www.youtube.com/@humaidiomar",
   instagram:
-    "https://www.instagram.com/humaidi_workout?igsh=MTBwaWs5OTJnNDgxdw==",
+    "https://www.instagram.com/humaidi_workout",
   whatsapp:
-    "https://api.whatsapp.com/send/?phone=971527827184&text&type=phone_number&app_absent=0&utm_source=ig",
+    "https://api.whatsapp.com/send/?phone=971527827184",
   tiktok: "https://www.tiktok.com/@humaidi_workout",
 };
 

@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://humaidiworkout.vercel.app";
+const siteUrl = "https://humaidiomar.com";
 
 export async function generateMetadata({
   params,
@@ -35,7 +35,7 @@ export async function generateMetadata({
     ? "حوّل جسمك وابنِ انضباطك مع برامج تدريب ذكية وتغذية متوازنة."
     : "Transforming Bodies. Building Discipline.";
 
-  const ogLocale = isArabic ? "ar_AE" : "en_US";
+  const ogLocale = isArabic ? "ar_EG" : "en_US";
 
   return {
     metadataBase: new URL(siteUrl),
@@ -44,10 +44,10 @@ export async function generateMetadata({
     description,
 
     alternates: {
-      canonical: `/${locale}`,
+      canonical: `${siteUrl}/${locale}`,
       languages: {
-        en: "/en",
-        ar: "/ar",
+        en: `${siteUrl}/en`,
+        ar: `${siteUrl}/ar`,
       },
     },
 
@@ -78,6 +78,10 @@ export async function generateMetadata({
       index: true,
       follow: true,
     },
+
+    icons: {
+      icon: "/hicon.png",
+    },
   };
 }
 
@@ -96,11 +100,52 @@ export default async function RootLayout({
   const messages = await getMessages();
   const direction = locale === "ar" ? "rtl" : "ltr";
 
+  // 🔥 Structured Data (SEO Schema)
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "OnlineBusiness",
+    name: "Humaidi Omar Online Coaching",
+    url: "https://humaidiomar.com",
+    logo: "https://humaidiomar.com/hicon.png",
+    image: "https://humaidiomar.com/images/og-cover.png",
+    description:
+      "Online fitness coaching for clients in UAE and Egypt. Personalized workout and nutrition programs.",
+    areaServed: [
+      {
+        "@type": "Country",
+        name: "United Arab Emirates",
+      },
+      {
+        "@type": "Country",
+        name: "Egypt",
+      },
+    ],
+    serviceType: "Online Fitness Coaching",
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+971527827184",
+      contactType: "customer service",
+      availableLanguage: ["English", "Arabic"],
+    },
+    sameAs: [
+      "https://www.instagram.com/humaidi_workout",
+      "https://api.whatsapp.com/send/?phone=971527827184",
+    ],
+  };
+
   return (
     <html lang={locale} dir={direction}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* JSON-LD Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData),
+          }}
+        />
+
         <NextIntlClientProvider messages={messages}>
           <SplashWrapper>
             {children}
